@@ -84,7 +84,10 @@ public class StompMessage {
             matcher.find();
             headers.add(new StompHeader(matcher.group(1), matcher.group(2)));
         }
-        //Corrected By Me
+        // if reader date is last element, skip() was crashing
+        // So checked condition for hasNext();
+        // As per requirement reader was getting two backslash characters
+        // Before it was there next line character.
         if(reader.hasNext()) {
             //reader.skip("\n\n");
             reader.skip("\\s");
